@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeSwitch Sentinel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>CodeSwitch Sentinel</h1>
+        <p>Understanding multilingual communication with AI</p>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>Language Classification Research</h2>
+            <p>
+                Can machine learning distinguish English,
+                Bangla, Romanized Bangla, and mixed messages?
+            </p>
+        </section>
+
+        <section class="classifier">
+            <h2>Test a message</h2>
+
+            <textarea id="message"
+                placeholder="Write a message here..."></textarea>
+
+            <button onclick="analyzeMessage()">
+                Analyze Message
+            </button>
+
+            <p id="result">Your result will appear here.</p>
+        </section>
+
+        <section class="categories">
+            <h2>Our four categories</h2>
+            <ul>
+                <li>EN — English</li>
+                <li>BN — Bangla script</li>
+                <li>BN-ROM — Romanized Bangla</li>
+                <li>MIXED — Bangla and English</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>CodeSwitch Sentinel | AI + Languages Research</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
