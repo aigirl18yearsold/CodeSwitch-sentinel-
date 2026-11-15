@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaLearn AI Tutor — Model Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f0f4ff;
+    color: #202943;
+}
+
+.container {
+    max-width: 650px;
+    margin: 30px auto;
+    background: white;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px #00000012;
+}
+
+h1 {
+    color: #4b55c8;
+}
+
+.subtitle {
+    color: #667085;
+    line-height: 1.5;
+}
+
+#status {
+    padding: 12px;
+    background: #eef0ff;
+    border-radius: 10px;
+    margin: 18px 0;
+    font-size: 14px;
+}
+
+#chat {
+    min-height: 180px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fc;
+    border-radius: 12px;
+}
+
+.message {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.user {
+    background: #e2e7ff;
+}
+
+.ai {
+    background: #e5f7ee;
+}
+
+textarea {
+    width: 100%;
+    min-height: 85px;
+    padding: 12px;
+    margin-top: 15px;
+    border: 1px solid #ccd2e0;
+    border-radius: 10px;
+    font-size: 16px;
+    resize: vertical;
+}
+
+button {
+    padding: 13px 18px;
+    margin: 8px 5px 8px 0;
+    border: none;
+    border-radius: 9px;
+    background: #505bd0;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.note {
+    font-size: 13px;
+    color: #667085;
+    line-height: 1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>LinguaLearn AI Tutor</h1>
+
+<p class="subtitle">
+An experimental generative AI assistant.
+Ask questions in English or Bengali.
+</p>
+
+<div id="status">
+Model not loaded. Tap Load AI Model to begin.
+</div>
+
+<button id="loadButton">Load AI Model</button>
+
+<div id="chat">
+    <p class="note">Your conversation will appear here.</p>
+</div>
+
+<textarea
+    id="question"
+    placeholder="Ask me something..."
+></textarea>
+
+<button id="sendButton" disabled>
+    Send Message
+</button>
+
+<p class="note">
+Experimental local AI. Model files are downloaded on first use.
+Responses may be slow or inaccurate.
+</p>
+
+</div>
+
+<script type="module">
+
+import { pipeline } from
+"https://cdn.jsdelivr.net/npm/@huggingface/transformers@4";
+
+const MODEL_ID =
+"onnx-community/Qwen2.5-0.5B-Instruct";
+
+let generator = null;
+let busy = false;
+
+const statusBox = document.getElementById("status");
+const chat = document.getElementById("chat");
+const question = document.getElementById("question");
+const loadButton = document.getElementById("loadButton");
+const sendButton = document.getElementById("sendButton");
+
+const conversation = [
+    {
+        role: "system",
+        content:
+        "You are LinguaLearn AI Tutor. Help students understand English, vocabulary, grammar, science and programming. Explain clearly and patiently. Use simple examples. If the user writes in Bengali, try to respond in Bengali. Be honest when uncertain."
+    }
+];
+
+function addMessage(role, text) {
+    const message = document.createElement("div");
+
+    message.className =
+        "message " + (role === "user" ? "user" : "ai");
+
+    message.textContent =
+        (role === "user" ? "You: " : "AI Tutor: ") + text;
+
+    chat.appendChild(message);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+async function loadModel() {
+    if (generator || busy) return;
+
+    busy = true;
+    loadButton.disabled = true;
+
+    try {
+        statusBox.textContent =
+            "Loading AI model. This may take a long time on your tablet. Please wait.";
+
+        generator = await pipeline(
+            "text-generation",
+            MODEL_ID,
+            { dtype: "q4" }
+        );
+
+        statusBox.textContent =
+            "AI model loaded successfully! You can now ask questions.";
+
+        sendButton.disabled = false;
+        loadButton.textContent = "Model Loaded";
+
+    } catch (error) {
+        generator = null;
+
+        statusBox.textContent =
+            "Could not load the model: " + error.message;
+
+        loadButton.disabled = false;
+    }
+
+    busy = false;
+}
+
+async function sendMessage() {
+    const text = question.value.trim();
+
+    if (!text || busy) return;
+
+    if (!generator) {
+        statusBox.textContent =
+            "Please load the AI model first.";
+        return;
+    }
+
+    busy = true;
+    sendButton.disabled = true;
+
+    question.value = "";
+    addMessage("user", text);
+
+    conversation.push({
+        role: "user",
+        content: text
+    });
+
+    statusBox.textContent =
+        "AI is generating your answer. Please wait.";
+
+    try {
+        const messages = conversation.slice(-7);
+
+        const result = await generator(messages, {
+            max_new_tokens: 100,
+            temperature: 0.7,
+            do_sample: true
+        });
+
+        const generated = result[0].generated_text;
+
+        const answer = Array.isArray(generated)
+            ? generated[generated.length - 1].content
+            : generated;
+
+        conversation.push({
+            role: "assistant",
+            content: answer
+        });
+
+        addMessage("ai", answer);
+
+        statusBox.textContent = "Answer generated.";
+
+    } catch (error) {
+        statusBox.textContent =
+            "Generation failed: " + error.message;
+
+        conversation.pop();
+    }
+
+    busy = false;
+    sendButton.disabled = false;
+}
+
+loadButton.addEventListener("click", loadModel);
+sendButton.addEventListener("click", sendMessage);
+
+question.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+    }
+});
+
+</script>
+
+</body>
+  </html>
+  
