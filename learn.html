@@ -4,260 +4,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CodeSwitch Sentinel | Learn English</title>
+<title>LinguaLearn | Learn English</title>
 
 <style>
 :root {
-  --primary: #3157d5;
-  --green: #16845b;
-  --bg: #f5f7fb;
-  --text: #18243a;
-  --muted: #66738a;
-  --border: #e4e9f2;
+  --green: #58cc02;
+  --dark-green: #46a302;
+  --ink: #263238;
+  --muted: #777;
+  --line: #e5e5e5;
+  --bg: #f7f9fa;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
   font-family: Arial, sans-serif;
-  line-height: 1.6;
+  color: var(--ink);
+  background: white;
 }
 
 header {
-  background: #17284b;
-  color: white;
-  padding: 22px 16px;
+  padding: 17px 6%;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-}
-
-header h2 { margin: 0; }
-
-header p {
-  color: #d7e0f5;
-  margin-bottom: 0;
+.logo {
+  color: var(--green);
+  font-size: 23px;
+  font-weight: 900;
 }
 
 nav {
   display: flex;
+  gap: 18px;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 15px;
 }
 
 nav a {
-  color: white;
   text-decoration: none;
-  border: 1px solid #52648a;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
+  color: #555;
+  font-weight: bold;
+  font-size: 14px;
 }
 
+nav a:hover { color: var(--green); }
+
 main {
-  max-width: 900px;
+  max-width: 1050px;
   margin: auto;
-  padding: 22px 14px 45px;
+  padding: 35px 18px;
+}
+
+.hero {
+  background: #efffe3;
+  border: 2px solid #d7f5c4;
+  border-radius: 22px;
+  padding: 28px;
+  margin-bottom: 30px;
 }
 
 .hero h1 {
-  font-size: 32px;
-  margin-bottom: 5px;
+  font-size: clamp(27px, 5vw, 42px);
+  margin: 0 0 12px;
 }
 
-.hero p, .muted {
-  color: var(--muted);
+.hero p {
+  color: #52634a;
+  line-height: 1.6;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-  gap: 13px;
-  margin: 20px 0;
-}
-
-.card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 14px;
+.stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
 }
 
 .stat {
-  font-size: 27px;
-  color: var(--primary);
+  background: white;
+  border: 1px solid #dcebd3;
+  border-radius: 12px;
+  padding: 12px 18px;
   font-weight: bold;
+}
+
+.section-title {
+  margin: 35px 0 18px;
+  font-size: 24px;
+}
+
+.progress-wrap {
+  background: #e9e9e9;
+  border-radius: 20px;
+  height: 12px;
+  overflow: hidden;
+  margin: 10px 0 24px;
 }
 
 .progress {
-  height: 9px;
-  background: #e8edf7;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.progress div {
   height: 100%;
-  width: 0;
+  width: 0%;
   background: var(--green);
+  transition: width .3s;
 }
 
-.lessons {
+.lesson-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
 }
 
 .lesson {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 17px;
-  text-align: left;
-  cursor: pointer;
-  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 17px;
+  padding: 20px;
+  transition: .2s;
 }
 
 .lesson:hover {
-  border-color: var(--primary);
+  border-color: var(--green);
+  transform: translateY(-3px);
 }
 
-.lesson strong {
-  display: block;
-  font-size: 17px;
-  margin: 6px 0;
+.lesson-icon {
+  font-size: 35px;
+  margin-bottom: 12px;
 }
 
-.tag {
-  color: var(--primary);
-  font-size: 11px;
-  font-weight: bold;
+.lesson h3 { margin: 5px 0; }
+
+.lesson p {
+  color: var(--muted);
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 button {
-  font: inherit;
-  cursor: pointer;
-}
-
-.primary, .secondary {
-  padding: 11px 16px;
-  border: 0;
-  border-radius: 10px;
-}
-
-.primary {
-  background: var(--primary);
+  background: var(--green);
   color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
   font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
 }
 
-.secondary {
-  background: #eaf0ff;
-  color: var(--primary);
-}
+button:hover { background: var(--dark-green); }
 
-button:disabled {
-  opacity: .5;
-  cursor: not-allowed;
-}
-
-.panel {
-  display: none;
+button.secondary {
   background: white;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 19px;
-  margin: 18px 0;
+  color: var(--green);
+  border: 2px solid var(--green);
 }
 
-.panel.active { display: block; }
+#lessonArea, #quizArea {
+  display: none;
+  margin-top: 25px;
+  padding: 23px;
+  border: 2px solid var(--line);
+  border-radius: 18px;
+}
 
 .word {
-  font-size: 29px;
+  background: #f1fbe9;
+  padding: 13px;
+  border-radius: 10px;
+  margin: 9px 0;
+}
+
+.question {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 15px 0;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  text-align: left;
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--line);
+}
+
+.option:hover {
+  background: #f1fbe9;
+  border-color: var(--green);
+}
+
+#feedback {
   font-weight: bold;
   margin-top: 12px;
 }
 
-.translation {
-  color: var(--green);
-  font-size: 20px;
+.detector {
+  margin-top: 45px;
+  padding: 25px;
+  background: #f1f5ff;
+  border: 2px solid #dce5ff;
+  border-radius: 18px;
+}
+
+.detector h2 { margin-top: 0; }
+
+.detector a {
+  display: inline-block;
+  margin-top: 10px;
+  background: #3157d5;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
   font-weight: bold;
 }
-
-.example {
-  background: var(--bg);
-  border-radius: 12px;
-  padding: 13px;
-  margin: 15px 0;
-}
-
-.choice {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 12px;
-  margin: 8px 0;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-}
-
-.choice.selected {
-  border: 2px solid var(--primary);
-  background: #eaf0ff;
-}
-
-.choice.correct {
-  border: 2px solid var(--green);
-  background: #eaf8f1;
-}
-
-.choice.wrong {
-  border: 2px solid #c44747;
-  background: #fff0f0;
-}
-
-.feedback {
-  display: none;
-  padding: 12px;
-  border-radius: 10px;
-  margin: 12px 0;
-}
-
-.feedback.show { display: block; }
-
-.good {
-  background: #eaf8f1;
-  color: #126344;
-}
-
-.bad {
-  background: #fff0f0;
-  color: #9b3030;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
-.spacer { flex: 1; }
 
 footer {
   text-align: center;
   color: var(--muted);
-  padding: 20px;
-  font-size: 13px;
+  padding: 30px 15px;
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
 }
 </style>
 </head>
@@ -265,516 +241,307 @@ footer {
 <body>
 
 <header>
-  <div class="container">
-    <h2>CodeSwitch Sentinel</h2>
-    <p>English learning for Bangla speakers</p>
-
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#lessons">Lessons</a>
-      <a href="#practice">Practice</a>
-      <a href="./">AI Language Identifier</a>
-    </nav>
-  </div>
+  <div class="logo">🌱 LinguaLearn</div>
+  <nav>
+    <a href="#lessons">Lessons</a>
+    <a href="#practice">Practice</a>
+    <a href="#detector">Language Detection</a>
+  </nav>
 </header>
 
-<main id="home">
+<main>
 
-  <section class="hero">
-    <h1>Learn English, one lesson at a time.</h1>
-    <p>
-      শব্দ শিখুন, বাক্য অনুশীলন করুন এবং
-      ধাপে ধাপে ইংরেজিতে আত্মবিশ্বাসী হন।
-    </p>
-  </section>
+<section class="hero">
+  <h1>Learn English, one step at a time.</h1>
+  <p>বাংলা থেকে ইংরেজি শেখা শুরু করুন। Learn new words, build sentences, and practice every day.</p>
 
-  <section class="grid">
+  <div class="stats">
+    <div class="stat">⭐ <span id="xp">0</span> XP</div>
+    <div class="stat">📚 <span id="completed">0</span>/3 Lessons</div>
+    <div class="stat">🎯 Beginner</div>
+  </div>
+</section>
 
-    <div class="card">
-      <div class="muted">Lessons completed</div>
-      <div class="stat" id="lessonCount">0 / 3</div>
-      <div class="progress">
-        <div id="lessonBar"></div>
-      </div>
-    </div>
+<section id="lessons">
+  <h2 class="section-title">Your learning path</h2>
+  <p>Complete each lesson to build your English skills.</p>
 
-    <div class="card">
-      <div class="muted">Best quiz score</div>
-      <div class="stat" id="bestScore">0%</div>
-      <div class="muted">Saved in this browser</div>
-    </div>
+  <div class="progress-wrap">
+    <div class="progress" id="progress"></div>
+  </div>
 
-    <div class="card">
-      <div class="muted">Daily goal</div>
-      <h3>10 minutes</h3>
-      <p class="muted">Practice a little every day.</p>
-    </div>
+  <div class="lesson-list">
 
-  </section>
+    <article class="lesson">
+      <div class="lesson-icon">📖</div>
+      <h3>Lesson 1: Vocabulary</h3>
+      <p>Learn five useful English words with Bangla meanings.</p>
+      <button onclick="openLesson(0)">Start lesson</button>
+      <p id="status0">Not completed</p>
+    </article>
 
-  <h2 id="lessons">Choose a lesson | পাঠ বেছে নিন</h2>
+    <article class="lesson">
+      <div class="lesson-icon">💬</div>
+      <h3>Lesson 2: Sentences</h3>
+      <p>Learn how to create simple everyday sentences.</p>
+      <button onclick="openLesson(1)">Start lesson</button>
+      <p id="status1">Not completed</p>
+    </article>
 
-  <section class="lessons">
+    <article class="lesson">
+      <div class="lesson-icon">🧠</div>
+      <h3>Lesson 3: Grammar</h3>
+      <p>Understand the basics of am, is and are.</p>
+      <button onclick="openLesson(2)">Start lesson</button>
+      <p id="status2">Not completed</p>
+    </article>
 
-    <button class="lesson" data-lesson="0">
-      <span class="tag">LESSON 01</span>
-      <strong>Everyday Words</strong>
-      দৈনন্দিন শব্দ · 5 words
+  </div>
+</section>
+
+<section id="lessonArea">
+  <h2 id="lessonTitle"></h2>
+  <div id="lessonContent"></div>
+  <button onclick="completeLesson()">Complete lesson ✓</button>
+  <button class="secondary" onclick="closeLesson()">Close</button>
+</section>
+
+<section id="practice">
+  <h2 class="section-title">🎯 Practice time</h2>
+  <p>Test what you have learned with a short quiz.</p>
+  <button onclick="startQuiz()">Start practice</button>
+
+  <div id="quizArea">
+    <h3 id="questionText"></h3>
+    <div id="options"></div>
+    <p id="feedback"></p>
+    <button id="nextButton" onclick="nextQuestion()" style="display:none">
+      Next question
     </button>
+    <p id="score"></p>
+  </div>
+</section>
 
-    <button class="lesson" data-lesson="1">
-      <span class="tag">LESSON 02</span>
-      <strong>Simple Sentences</strong>
-      সহজ বাক্য · 5 examples
-    </button>
-
-    <button class="lesson" data-lesson="2">
-      <span class="tag">LESSON 03</span>
-      <strong>Am, Is, Are</strong>
-      ইংরেজি ব্যাকরণ
-    </button>
-
-  </section>
-
-  <section class="panel" id="lessonPanel">
-
-    <div class="row">
-      <span class="tag" id="lessonEyebrow"></span>
-      <span class="spacer"></span>
-      <span class="muted" id="cardPosition"></span>
-    </div>
-
-    <h2 id="lessonTitle"></h2>
-
-    <div class="word" id="lessonWord"></div>
-    <div class="translation" id="lessonMeaning"></div>
-
-    <div class="example">
-      <strong>Example</strong>
-      <div id="lessonExample"></div>
-      <div class="muted" id="lessonExampleBn"></div>
-    </div>
-
-    <div class="row">
-      <button class="secondary" id="prevCard">Previous</button>
-      <span class="spacer"></span>
-      <button class="primary" id="nextCard">Next</button>
-    </div>
-
-    <div class="feedback good" id="lessonDone">
-      Lesson completed! দারুণ কাজ!
-    </div>
-
-  </section>
-
-  <h2 id="practice">Practice | অনুশীলন</h2>
-
-  <section class="card">
-
-    <div class="row">
-      <span class="tag">QUICK QUIZ</span>
-      <span class="spacer"></span>
-      <span class="muted" id="quizPosition"></span>
-    </div>
-
-    <h3 id="question"></h3>
-
-    <div id="choices"></div>
-
-    <div class="feedback" id="quizFeedback"></div>
-
-    <div class="row">
-      <button class="primary" id="checkAnswer" disabled>
-        Check answer
-      </button>
-
-      <span class="spacer"></span>
-
-      <button class="secondary" id="nextQuestion" disabled>
-        Next
-      </button>
-    </div>
-
-    <p class="muted" id="quizResult"></p>
-
-  </section>
-
-  <section class="card">
-    <h3>About CodeSwitch Sentinel</h3>
-    <p class="muted">
-      This learning module provides beginner English lessons,
-      Bangla explanations, interactive quizzes and progress
-      tracking. The original language-identification classifier
-      remains a separate feature.
-    </p>
-  </section>
+<section class="detector" id="detector">
+  <h2>🌐 Language Detection</h2>
+  <p>Want to identify Bangla, English, Romanized Bangla, or mixed-language text?</p>
+  <p>Open CodeSwitch Sentinel, our separate language identification tool.</p>
+  <a href="./">Open Language Detection →</a>
+</section>
 
 </main>
 
 <footer>
-  CodeSwitch Sentinel · English and Bangla Learning
+  LinguaLearn · Learn without limits 🌱
 </footer>
 
 <script>
-
 const lessons = [
-
-{
- title: "Everyday Words",
- items: [
-  ["book","বই","I read a book.","আমি একটি বই পড়ি।"],
-  ["water","পানি","I drink water.","আমি পানি পান করি।"],
-  ["school","বিদ্যালয় / স্কুল","I go to school.","আমি স্কুলে যাই।"],
-  ["learn","শেখা","I learn English.","আমি ইংরেজি শিখি।"],
-  ["friend","বন্ধু","She is my friend.","সে আমার বন্ধু।"]
- ]
-},
-
-{
- title: "Simple Sentences",
- items: [
-  ["I am learning.","আমি শিখছি।","I am learning English.","আমি ইংরেজি শিখছি।"],
-  ["I like books.","আমি বই পছন্দ করি।","I like reading books.","আমি বই পড়তে পছন্দ করি।"],
-  ["This is my pen.","এটি আমার কলম।","This is my new pen.","এটি আমার নতুন কলম।"],
-  ["We are students.","আমরা শিক্ষার্থী।","We are students at this school.","আমরা এই স্কুলের শিক্ষার্থী।"],
-  ["She speaks English.","সে ইংরেজিতে কথা বলে।","She speaks English every day.","সে প্রতিদিন ইংরেজিতে কথা বলে।"]
- ]
-},
-
-{
- title: "Am, Is, Are",
- items: [
-  ["I am","আমি ...","I am a student.","আমি একজন শিক্ষার্থী।"],
-  ["You are","তুমি ...","You are kind.","তুমি দয়ালু।"],
-  ["He is","সে ... (ছেলে)","He is my brother.","সে আমার ভাই।"],
-  ["She is","সে ... (মেয়ে)","She is a teacher.","তিনি একজন শিক্ষিকা।"],
-  ["We are","আমরা ...","We are ready.","আমরা প্রস্তুত।"]
- ]
-}
-
+  {
+    title: "Lesson 1: Vocabulary",
+    content: [
+      ["Apple", "আপেল"],
+      ["Book", "বই"],
+      ["Water", "পানি"],
+      ["Friend", "বন্ধু"],
+      ["School", "বিদ্যালয়"]
+    ]
+  },
+  {
+    title: "Lesson 2: Everyday sentences",
+    content: [
+      ["I am happy.", "আমি খুশি।"],
+      ["How are you?", "তুমি কেমন আছো?"],
+      ["Thank you.", "ধন্যবাদ।"],
+      ["I like reading.", "আমি পড়তে ভালোবাসি।"],
+      ["This is my book.", "এটি আমার বই।"]
+    ]
+  },
+  {
+    title: "Lesson 3: Grammar basics",
+    content: [
+      ["I am a student.", "আমি একজন শিক্ষার্থী।"],
+      ["She is happy.", "সে খুশি।"],
+      ["He is my friend.", "সে আমার বন্ধু।"],
+      ["They are students.", "তারা শিক্ষার্থী।"],
+      ["We are learning.", "আমরা শিখছি।"]
+    ]
+  }
 ];
 
-const quiz = [
+let currentLesson = -1;
+let completedLessons = JSON.parse(
+  localStorage.getItem("linguaCompleted") || "[]"
+);
+let xp = Number(localStorage.getItem("linguaXP") || 0);
 
-{
- q:"What is the English meaning of “বই”?",
- a:["Book","Water","School"],
- correct:0,
- why:"বই means book."
-},
+function updateStats() {
+  document.getElementById("xp").textContent = xp;
+  document.getElementById("completed").textContent =
+    completedLessons.length;
 
-{
- q:"Choose the correct translation: “আমি পানি পান করি।”",
- a:["I read water.","I drink water.","I write water."],
- correct:1,
- why:"পানি পান করি = drink water."
-},
+  document.getElementById("progress").style.width =
+    (completedLessons.length / 3 * 100) + "%";
 
-{
- q:"Complete: I ___ a student.",
- a:["is","are","am"],
- correct:2,
- why:"Use am with I."
-},
-
-{
- q:"What does friend mean in Bangla?",
- a:["শিক্ষক","বন্ধু","বই"],
- correct:1,
- why:"Friend means বন্ধু."
-},
-
-{
- q:"Choose the correct sentence.",
- a:["She are happy.","She am happy.","She is happy."],
- correct:2,
- why:"Use is with he, she and it."
-}
-
-];
-
-const storageKey = "codeswitchEnglishProgressV1";
-
-let saved = {
- completed: [],
- best: 0
-};
-
-try {
- saved = {
-  ...saved,
-  ...JSON.parse(localStorage.getItem(storageKey) || "{}")
- };
-} catch(error) {}
-
-function saveProgress() {
- try {
-  localStorage.setItem(storageKey, JSON.stringify(saved));
- } catch(error) {}
-
- updateProgress();
-}
-
-function updateProgress() {
- document.getElementById("lessonCount").textContent =
-  saved.completed.length + " / 3";
-
- document.getElementById("lessonBar").style.width =
-  (saved.completed.length / 3 * 100) + "%";
-
- document.getElementById("bestScore").textContent =
-  saved.best + "%";
-}
-
-updateProgress();
-
-let activeLesson = 0;
-let cardIndex = 0;
-
-const panel = document.getElementById("lessonPanel");
-
-function showCard() {
-
- const lesson = lessons[activeLesson];
- const item = lesson.items[cardIndex];
-
- document.getElementById("lessonEyebrow").textContent =
-  "LESSON 0" + (activeLesson + 1);
-
- document.getElementById("lessonTitle").textContent =
-  lesson.title;
-
- document.getElementById("cardPosition").textContent =
-  (cardIndex + 1) + " / " + lesson.items.length;
-
- document.getElementById("lessonWord").textContent =
-  item[0];
-
- document.getElementById("lessonMeaning").textContent =
-  item[1];
-
- document.getElementById("lessonExample").textContent =
-  item[2];
-
- document.getElementById("lessonExampleBn").textContent =
-  item[3];
-
- document.getElementById("prevCard").disabled =
-  cardIndex === 0;
-
- document.getElementById("nextCard").textContent =
-  cardIndex === lesson.items.length - 1
-   ? "Finish lesson"
-   : "Next";
-
- document.getElementById("lessonDone").className =
-  "feedback good";
- document.getElementById("lessonDone").style.display =
-  "none";
-}
-
-document.querySelectorAll("[data-lesson]").forEach(button => {
-
- button.addEventListener("click", () => {
-
-  activeLesson = Number(button.dataset.lesson);
-  cardIndex = 0;
-
-  panel.classList.add("active");
-
-  showCard();
-
-  panel.scrollIntoView({
-   behavior:"smooth",
-   block:"start"
+  lessons.forEach((lesson, i) => {
+    document.getElementById("status" + i).textContent =
+      completedLessons.includes(i) ? "✓ Completed" : "Not completed";
   });
+}
 
- });
+function openLesson(index) {
+  currentLesson = index;
+  const lesson = lessons[index];
 
-});
+  document.getElementById("lessonArea").style.display = "block";
+  document.getElementById("lessonTitle").textContent = lesson.title;
 
-document.getElementById("prevCard").onclick = () => {
+  document.getElementById("lessonContent").innerHTML =
+    lesson.content.map(item =>
+      `<div class="word"><strong>${item[0]}</strong><br>${item[1]}</div>`
+    ).join("");
 
- if(cardIndex > 0) {
-  cardIndex--;
-  showCard();
- }
+  document.getElementById("lessonArea").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 
-};
+function completeLesson() {
+  if (currentLesson < 0) return;
 
-document.getElementById("nextCard").onclick = () => {
+  if (!completedLessons.includes(currentLesson)) {
+    completedLessons.push(currentLesson);
+    xp += 10;
 
- if(cardIndex < lessons[activeLesson].items.length - 1) {
-
-  cardIndex++;
-  showCard();
-
- } else {
-
-  if(!saved.completed.includes(activeLesson)) {
-   saved.completed.push(activeLesson);
+    localStorage.setItem(
+      "linguaCompleted", JSON.stringify(completedLessons)
+    );
+    localStorage.setItem("linguaXP", xp);
   }
 
-  saveProgress();
-
-  const done = document.getElementById("lessonDone");
-
-  done.style.display = "block";
-  done.textContent =
-   "Lesson completed! দারুণ কাজ! Your progress is saved.";
-
-  document.getElementById("nextCard").textContent =
-   "Completed";
-
- }
-
-};
-
-// QUIZ
-
-let qi = 0;
-let selected = null;
-let answered = false;
-let score = 0;
-
-function renderQuiz() {
-
- const q = quiz[qi];
-
- selected = null;
- answered = false;
-
- document.getElementById("question").textContent = q.q;
-
- document.getElementById("quizPosition").textContent =
-  "Question " + (qi + 1) + " of " + quiz.length;
-
- document.getElementById("quizFeedback").className =
-  "feedback";
-
- document.getElementById("checkAnswer").disabled = true;
- document.getElementById("nextQuestion").disabled = true;
-
- document.getElementById("quizResult").textContent = "";
-
- const box = document.getElementById("choices");
-
- box.innerHTML = "";
-
- q.a.forEach((choice, index) => {
-
-  const button = document.createElement("button");
-
-  button.className = "choice";
-
-  button.textContent =
-   String.fromCharCode(65 + index) + ". " + choice;
-
-  button.onclick = () => {
-
-   if(answered) return;
-
-   selected = index;
-
-   box.querySelectorAll("button").forEach(item => {
-    item.classList.remove("selected");
-   });
-
-   button.classList.add("selected");
-
-   document.getElementById("checkAnswer").disabled = false;
-
-  };
-
-  box.appendChild(button);
-
- });
-
+  updateStats();
+  alert("Great work! You earned 10 XP.");
+  closeLesson();
 }
 
-document.getElementById("checkAnswer").onclick = () => {
+function closeLesson() {
+  document.getElementById("lessonArea").style.display = "none";
+  currentLesson = -1;
+}
 
- if(selected === null || answered) return;
+const questions = [
+  {
+    q: "What does 'Apple' mean in Bangla?",
+    options: ["বই", "আপেল", "পানি"],
+    answer: 1,
+    explanation: "Apple means আপেল."
+  },
+  {
+    q: "Choose the correct sentence.",
+    options: ["I is happy.", "I am happy.", "I are happy."],
+    answer: 1,
+    explanation: "We use 'am' with I."
+  },
+  {
+    q: "What does 'Thank you' mean?",
+    options: ["ধন্যবাদ", "বিদায়", "স্বাগতম"],
+    answer: 0,
+    explanation: "Thank you means ধন্যবাদ."
+  },
+  {
+    q: "Complete: She ___ happy.",
+    options: ["am", "are", "is"],
+    answer: 2,
+    explanation: "Use 'is' with she."
+  },
+  {
+    q: "What does 'Friend' mean?",
+    options: ["শিক্ষক", "বন্ধু", "ছাত্র"],
+    answer: 1,
+    explanation: "Friend means বন্ধু."
+  }
+];
 
- answered = true;
+let questionIndex = 0;
+let quizScore = 0;
+let answered = false;
 
- const q = quiz[qi];
+function startQuiz() {
+  questionIndex = 0;
+  quizScore = 0;
+  document.getElementById("quizArea").style.display = "block";
+  showQuestion();
+  document.getElementById("quizArea").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 
- const buttons = document.querySelectorAll("#choices button");
+function showQuestion() {
+  answered = false;
+  const q = questions[questionIndex];
 
- buttons[q.correct].classList.add("correct");
+  document.getElementById("questionText").textContent =
+    `Question ${questionIndex + 1}/5: ${q.q}`;
 
- const correct = selected === q.correct;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("score").textContent = "";
+  document.getElementById("nextButton").style.display = "none";
 
- if(correct) {
-  score++;
- } else {
-  buttons[selected].classList.add("wrong");
- }
+  const options = document.getElementById("options");
+  options.innerHTML = "";
 
- const feedback = document.getElementById("quizFeedback");
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = option;
+    button.onclick = () => checkAnswer(index);
+    options.appendChild(button);
+  });
+}
 
- feedback.className =
-  "feedback show " + (correct ? "good" : "bad");
+function checkAnswer(index) {
+  if (answered) return;
+  answered = true;
 
- feedback.textContent =
-  (correct ? "Correct! " : "Not quite. ") + q.why;
+  const q = questions[questionIndex];
+  const correct = index === q.answer;
 
- document.getElementById("checkAnswer").disabled = true;
- document.getElementById("nextQuestion").disabled = false;
+  if (correct) quizScore++;
 
-};
+  document.getElementById("feedback").textContent =
+    (correct ? "✓ Correct! " : "Not quite. ") + q.explanation;
 
-document.getElementById("nextQuestion").onclick = () => {
+  document.getElementById("nextButton").style.display = "inline-block";
+}
 
- if(!answered) return;
+function nextQuestion() {
+  questionIndex++;
 
- if(qi < quiz.length - 1) {
+  if (questionIndex < questions.length) {
+    showQuestion();
+  } else {
+    document.getElementById("questionText").textContent =
+      "Practice complete! 🎉";
 
-  qi++;
-  renderQuiz();
+    document.getElementById("options").innerHTML = "";
+    document.getElementById("feedback").textContent =
+      "Your score: " + quizScore + " out of 5.";
 
- } else {
+    document.getElementById("nextButton").style.display = "none";
+    document.getElementById("score").textContent =
+      "Keep practicing to improve!";
 
-  const percentage = Math.round(score / quiz.length * 100);
+    if (quizScore === 5) {
+      xp += 10;
+      localStorage.setItem("linguaXP", xp);
+      updateStats();
+    }
+  }
+}
 
-  saved.best = Math.max(saved.best, percentage);
-
-  saveProgress();
-
-  document.getElementById("question").textContent =
-   "Practice complete!";
-
-  document.getElementById("choices").innerHTML = "";
-
-  document.getElementById("quizPosition").textContent =
-   "Finished";
-
-  document.getElementById("quizFeedback").className =
-   "feedback show good";
-
-  document.getElementById("quizFeedback").textContent =
-   "You scored " + score + " out of " +
-   quiz.length + " (" + percentage + "%). Keep practising!";
-
-  document.getElementById("checkAnswer").disabled = true;
-  document.getElementById("nextQuestion").disabled = true;
-
-  document.getElementById("quizResult").textContent =
-   "Your best score is saved in this browser.";
-
-  qi = 0;
-  score = 0;
-
-  setTimeout(renderQuiz, 6500);
-
- }
-
-};
-
-renderQuiz();
-
+updateStats();
 </script>
 
 </body>
-</html>
+  </html>
+  
