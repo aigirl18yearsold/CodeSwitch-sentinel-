@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeSwitch Sentinel | Learn English</title>
+
+<style>
+:root {
+  --primary: #3157d5;
+  --green: #16845b;
+  --bg: #f5f7fb;
+  --text: #18243a;
+  --muted: #66738a;
+  --border: #e4e9f2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  background: #17284b;
+  color: white;
+  padding: 22px 16px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+header h2 { margin: 0; }
+
+header p {
+  color: #d7e0f5;
+  margin-bottom: 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  border: 1px solid #52648a;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 22px 14px 45px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  margin-bottom: 5px;
+}
+
+.hero p, .muted {
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  gap: 13px;
+  margin: 20px 0;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 17px;
+  margin-bottom: 14px;
+}
+
+.stat {
+  font-size: 27px;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.progress {
+  height: 9px;
+  background: #e8edf7;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress div {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+}
+
+.lessons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+  gap: 12px;
+}
+
+.lesson {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 17px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.lesson:hover {
+  border-color: var(--primary);
+}
+
+.lesson strong {
+  display: block;
+  font-size: 17px;
+  margin: 6px 0;
+}
+
+.tag {
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.primary, .secondary {
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 10px;
+}
+
+.primary {
+  background: var(--primary);
+  color: white;
+  font-weight: bold;
+}
+
+.secondary {
+  background: #eaf0ff;
+  color: var(--primary);
+}
+
+button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.panel {
+  display: none;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 19px;
+  margin: 18px 0;
+}
+
+.panel.active { display: block; }
+
+.word {
+  font-size: 29px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+.translation {
+  color: var(--green);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.example {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 13px;
+  margin: 15px 0;
+}
+
+.choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 8px 0;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.choice.selected {
+  border: 2px solid var(--primary);
+  background: #eaf0ff;
+}
+
+.choice.correct {
+  border: 2px solid var(--green);
+  background: #eaf8f1;
+}
+
+.choice.wrong {
+  border: 2px solid #c44747;
+  background: #fff0f0;
+}
+
+.feedback {
+  display: none;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 12px 0;
+}
+
+.feedback.show { display: block; }
+
+.good {
+  background: #eaf8f1;
+  color: #126344;
+}
+
+.bad {
+  background: #fff0f0;
+  color: #9b3030;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.spacer { flex: 1; }
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <h2>CodeSwitch Sentinel</h2>
+    <p>English learning for Bangla speakers</p>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#practice">Practice</a>
+      <a href="./">AI Language Identifier</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <h1>Learn English, one lesson at a time.</h1>
+    <p>
+      শব্দ শিখুন, বাক্য অনুশীলন করুন এবং
+      ধাপে ধাপে ইংরেজিতে আত্মবিশ্বাসী হন।
+    </p>
+  </section>
+
+  <section class="grid">
+
+    <div class="card">
+      <div class="muted">Lessons completed</div>
+      <div class="stat" id="lessonCount">0 / 3</div>
+      <div class="progress">
+        <div id="lessonBar"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="muted">Best quiz score</div>
+      <div class="stat" id="bestScore">0%</div>
+      <div class="muted">Saved in this browser</div>
+    </div>
+
+    <div class="card">
+      <div class="muted">Daily goal</div>
+      <h3>10 minutes</h3>
+      <p class="muted">Practice a little every day.</p>
+    </div>
+
+  </section>
+
+  <h2 id="lessons">Choose a lesson | পাঠ বেছে নিন</h2>
+
+  <section class="lessons">
+
+    <button class="lesson" data-lesson="0">
+      <span class="tag">LESSON 01</span>
+      <strong>Everyday Words</strong>
+      দৈনন্দিন শব্দ · 5 words
+    </button>
+
+    <button class="lesson" data-lesson="1">
+      <span class="tag">LESSON 02</span>
+      <strong>Simple Sentences</strong>
+      সহজ বাক্য · 5 examples
+    </button>
+
+    <button class="lesson" data-lesson="2">
+      <span class="tag">LESSON 03</span>
+      <strong>Am, Is, Are</strong>
+      ইংরেজি ব্যাকরণ
+    </button>
+
+  </section>
+
+  <section class="panel" id="lessonPanel">
+
+    <div class="row">
+      <span class="tag" id="lessonEyebrow"></span>
+      <span class="spacer"></span>
+      <span class="muted" id="cardPosition"></span>
+    </div>
+
+    <h2 id="lessonTitle"></h2>
+
+    <div class="word" id="lessonWord"></div>
+    <div class="translation" id="lessonMeaning"></div>
+
+    <div class="example">
+      <strong>Example</strong>
+      <div id="lessonExample"></div>
+      <div class="muted" id="lessonExampleBn"></div>
+    </div>
+
+    <div class="row">
+      <button class="secondary" id="prevCard">Previous</button>
+      <span class="spacer"></span>
+      <button class="primary" id="nextCard">Next</button>
+    </div>
+
+    <div class="feedback good" id="lessonDone">
+      Lesson completed! দারুণ কাজ!
+    </div>
+
+  </section>
+
+  <h2 id="practice">Practice | অনুশীলন</h2>
+
+  <section class="card">
+
+    <div class="row">
+      <span class="tag">QUICK QUIZ</span>
+      <span class="spacer"></span>
+      <span class="muted" id="quizPosition"></span>
+    </div>
+
+    <h3 id="question"></h3>
+
+    <div id="choices"></div>
+
+    <div class="feedback" id="quizFeedback"></div>
+
+    <div class="row">
+      <button class="primary" id="checkAnswer" disabled>
+        Check answer
+      </button>
+
+      <span class="spacer"></span>
+
+      <button class="secondary" id="nextQuestion" disabled>
+        Next
+      </button>
+    </div>
+
+    <p class="muted" id="quizResult"></p>
+
+  </section>
+
+  <section class="card">
+    <h3>About CodeSwitch Sentinel</h3>
+    <p class="muted">
+      This learning module provides beginner English lessons,
+      Bangla explanations, interactive quizzes and progress
+      tracking. The original language-identification classifier
+      remains a separate feature.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  CodeSwitch Sentinel · English and Bangla Learning
+</footer>
+
+<script>
+
+const lessons = [
+
+{
+ title: "Everyday Words",
+ items: [
+  ["book","বই","I read a book.","আমি একটি বই পড়ি।"],
+  ["water","পানি","I drink water.","আমি পানি পান করি।"],
+  ["school","বিদ্যালয় / স্কুল","I go to school.","আমি স্কুলে যাই।"],
+  ["learn","শেখা","I learn English.","আমি ইংরেজি শিখি।"],
+  ["friend","বন্ধু","She is my friend.","সে আমার বন্ধু।"]
+ ]
+},
+
+{
+ title: "Simple Sentences",
+ items: [
+  ["I am learning.","আমি শিখছি।","I am learning English.","আমি ইংরেজি শিখছি।"],
+  ["I like books.","আমি বই পছন্দ করি।","I like reading books.","আমি বই পড়তে পছন্দ করি।"],
+  ["This is my pen.","এটি আমার কলম।","This is my new pen.","এটি আমার নতুন কলম।"],
+  ["We are students.","আমরা শিক্ষার্থী।","We are students at this school.","আমরা এই স্কুলের শিক্ষার্থী।"],
+  ["She speaks English.","সে ইংরেজিতে কথা বলে।","She speaks English every day.","সে প্রতিদিন ইংরেজিতে কথা বলে।"]
+ ]
+},
+
+{
+ title: "Am, Is, Are",
+ items: [
+  ["I am","আমি ...","I am a student.","আমি একজন শিক্ষার্থী।"],
+  ["You are","তুমি ...","You are kind.","তুমি দয়ালু।"],
+  ["He is","সে ... (ছেলে)","He is my brother.","সে আমার ভাই।"],
+  ["She is","সে ... (মেয়ে)","She is a teacher.","তিনি একজন শিক্ষিকা।"],
+  ["We are","আমরা ...","We are ready.","আমরা প্রস্তুত।"]
+ ]
+}
+
+];
+
+const quiz = [
+
+{
+ q:"What is the English meaning of “বই”?",
+ a:["Book","Water","School"],
+ correct:0,
+ why:"বই means book."
+},
+
+{
+ q:"Choose the correct translation: “আমি পানি পান করি।”",
+ a:["I read water.","I drink water.","I write water."],
+ correct:1,
+ why:"পানি পান করি = drink water."
+},
+
+{
+ q:"Complete: I ___ a student.",
+ a:["is","are","am"],
+ correct:2,
+ why:"Use am with I."
+},
+
+{
+ q:"What does friend mean in Bangla?",
+ a:["শিক্ষক","বন্ধু","বই"],
+ correct:1,
+ why:"Friend means বন্ধু."
+},
+
+{
+ q:"Choose the correct sentence.",
+ a:["She are happy.","She am happy.","She is happy."],
+ correct:2,
+ why:"Use is with he, she and it."
+}
+
+];
+
+const storageKey = "codeswitchEnglishProgressV1";
+
+let saved = {
+ completed: [],
+ best: 0
+};
+
+try {
+ saved = {
+  ...saved,
+  ...JSON.parse(localStorage.getItem(storageKey) || "{}")
+ };
+} catch(error) {}
+
+function saveProgress() {
+ try {
+  localStorage.setItem(storageKey, JSON.stringify(saved));
+ } catch(error) {}
+
+ updateProgress();
+}
+
+function updateProgress() {
+ document.getElementById("lessonCount").textContent =
+  saved.completed.length + " / 3";
+
+ document.getElementById("lessonBar").style.width =
+  (saved.completed.length / 3 * 100) + "%";
+
+ document.getElementById("bestScore").textContent =
+  saved.best + "%";
+}
+
+updateProgress();
+
+let activeLesson = 0;
+let cardIndex = 0;
+
+const panel = document.getElementById("lessonPanel");
+
+function showCard() {
+
+ const lesson = lessons[activeLesson];
+ const item = lesson.items[cardIndex];
+
+ document.getElementById("lessonEyebrow").textContent =
+  "LESSON 0" + (activeLesson + 1);
+
+ document.getElementById("lessonTitle").textContent =
+  lesson.title;
+
+ document.getElementById("cardPosition").textContent =
+  (cardIndex + 1) + " / " + lesson.items.length;
+
+ document.getElementById("lessonWord").textContent =
+  item[0];
+
+ document.getElementById("lessonMeaning").textContent =
+  item[1];
+
+ document.getElementById("lessonExample").textContent =
+  item[2];
+
+ document.getElementById("lessonExampleBn").textContent =
+  item[3];
+
+ document.getElementById("prevCard").disabled =
+  cardIndex === 0;
+
+ document.getElementById("nextCard").textContent =
+  cardIndex === lesson.items.length - 1
+   ? "Finish lesson"
+   : "Next";
+
+ document.getElementById("lessonDone").className =
+  "feedback good";
+ document.getElementById("lessonDone").style.display =
+  "none";
+}
+
+document.querySelectorAll("[data-lesson]").forEach(button => {
+
+ button.addEventListener("click", () => {
+
+  activeLesson = Number(button.dataset.lesson);
+  cardIndex = 0;
+
+  panel.classList.add("active");
+
+  showCard();
+
+  panel.scrollIntoView({
+   behavior:"smooth",
+   block:"start"
+  });
+
+ });
+
+});
+
+document.getElementById("prevCard").onclick = () => {
+
+ if(cardIndex > 0) {
+  cardIndex--;
+  showCard();
+ }
+
+};
+
+document.getElementById("nextCard").onclick = () => {
+
+ if(cardIndex < lessons[activeLesson].items.length - 1) {
+
+  cardIndex++;
+  showCard();
+
+ } else {
+
+  if(!saved.completed.includes(activeLesson)) {
+   saved.completed.push(activeLesson);
+  }
+
+  saveProgress();
+
+  const done = document.getElementById("lessonDone");
+
+  done.style.display = "block";
+  done.textContent =
+   "Lesson completed! দারুণ কাজ! Your progress is saved.";
+
+  document.getElementById("nextCard").textContent =
+   "Completed";
+
+ }
+
+};
+
+// QUIZ
+
+let qi = 0;
+let selected = null;
+let answered = false;
+let score = 0;
+
+function renderQuiz() {
+
+ const q = quiz[qi];
+
+ selected = null;
+ answered = false;
+
+ document.getElementById("question").textContent = q.q;
+
+ document.getElementById("quizPosition").textContent =
+  "Question " + (qi + 1) + " of " + quiz.length;
+
+ document.getElementById("quizFeedback").className =
+  "feedback";
+
+ document.getElementById("checkAnswer").disabled = true;
+ document.getElementById("nextQuestion").disabled = true;
+
+ document.getElementById("quizResult").textContent = "";
+
+ const box = document.getElementById("choices");
+
+ box.innerHTML = "";
+
+ q.a.forEach((choice, index) => {
+
+  const button = document.createElement("button");
+
+  button.className = "choice";
+
+  button.textContent =
+   String.fromCharCode(65 + index) + ". " + choice;
+
+  button.onclick = () => {
+
+   if(answered) return;
+
+   selected = index;
+
+   box.querySelectorAll("button").forEach(item => {
+    item.classList.remove("selected");
+   });
+
+   button.classList.add("selected");
+
+   document.getElementById("checkAnswer").disabled = false;
+
+  };
+
+  box.appendChild(button);
+
+ });
+
+}
+
+document.getElementById("checkAnswer").onclick = () => {
+
+ if(selected === null || answered) return;
+
+ answered = true;
+
+ const q = quiz[qi];
+
+ const buttons = document.querySelectorAll("#choices button");
+
+ buttons[q.correct].classList.add("correct");
+
+ const correct = selected === q.correct;
+
+ if(correct) {
+  score++;
+ } else {
+  buttons[selected].classList.add("wrong");
+ }
+
+ const feedback = document.getElementById("quizFeedback");
+
+ feedback.className =
+  "feedback show " + (correct ? "good" : "bad");
+
+ feedback.textContent =
+  (correct ? "Correct! " : "Not quite. ") + q.why;
+
+ document.getElementById("checkAnswer").disabled = true;
+ document.getElementById("nextQuestion").disabled = false;
+
+};
+
+document.getElementById("nextQuestion").onclick = () => {
+
+ if(!answered) return;
+
+ if(qi < quiz.length - 1) {
+
+  qi++;
+  renderQuiz();
+
+ } else {
+
+  const percentage = Math.round(score / quiz.length * 100);
+
+  saved.best = Math.max(saved.best, percentage);
+
+  saveProgress();
+
+  document.getElementById("question").textContent =
+   "Practice complete!";
+
+  document.getElementById("choices").innerHTML = "";
+
+  document.getElementById("quizPosition").textContent =
+   "Finished";
+
+  document.getElementById("quizFeedback").className =
+   "feedback show good";
+
+  document.getElementById("quizFeedback").textContent =
+   "You scored " + score + " out of " +
+   quiz.length + " (" + percentage + "%). Keep practising!";
+
+  document.getElementById("checkAnswer").disabled = true;
+  document.getElementById("nextQuestion").disabled = true;
+
+  document.getElementById("quizResult").textContent =
+   "Your best score is saved in this browser.";
+
+  qi = 0;
+  score = 0;
+
+  setTimeout(renderQuiz, 6500);
+
+ }
+
+};
+
+renderQuiz();
+
+</script>
+
+</body>
+</html>
