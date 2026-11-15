@@ -30,7 +30,7 @@ const trainingData = [
     { text: "আজ আমার computer class আছে", label: "MIXED" },
     { text: "আমি research project তৈরি করছি", label: "MIXED" },
     { text: "আজ weather খুব সুন্দর", label: "MIXED" },
-    { text: "আমি machine learning শিখতে চাই", label: "MIXED" }
+    { text: "আমি machine learning শিখতে চাই", label: "MIXED" },
     
     // Additional researcher-written pilot examples
 
