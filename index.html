@@ -1,64 +1,744 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeSwitch Sentinel</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaLearn | CodeSwitch Sentinel</title>
+
+<style>
+:root {
+  --green: #58cc02;
+  --green-dark: #46a302;
+  --ink: #263238;
+  --muted: #718096;
+  --border: #e5e7eb;
+  --background: #f8fafb;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--ink);
+  background: white;
+}
+
+header {
+  padding: 16px 6%;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--green-dark);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: #52606d;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+nav a:hover { color: var(--green-dark); }
+
+main {
+  max-width: 1050px;
+  margin: auto;
+  padding: 28px 18px;
+}
+
+.hero {
+  background: #efffe5;
+  border: 2px solid #d8f3c8;
+  border-radius: 23px;
+  padding: 30px;
+  margin-bottom: 28px;
+}
+
+.hero-tag {
+  color: var(--green-dark);
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 44px);
+  margin: 12px 0;
+}
+
+.hero p {
+  color: #53634b;
+  line-height: 1.7;
+  max-width: 650px;
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.stat {
+  background: white;
+  padding: 13px 17px;
+  border-radius: 13px;
+  border: 1px solid #d8ebce;
+  font-weight: bold;
+}
+
+.section {
+  margin: 42px 0;
+  scroll-margin-top: 85px;
+}
+
+.section-heading {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.progress-track {
+  background: #e9ecef;
+  height: 12px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--green);
+  transition: width .3s;
+}
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.lesson-card {
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  transition: .2s;
+}
+
+.lesson-card:hover {
+  border-color: var(--green);
+  transform: translateY(-3px);
+}
+
+.lesson-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.lesson-card h3 { margin: 8px 0; }
+
+.lesson-card p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button {
+  border: none;
+  background: var(--green);
+  color: white;
+  border-radius: 12px;
+  padding: 13px 19px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { background: var(--green-dark); }
+
+button:disabled {
+  opacity: .6;
+  cursor: default;
+}
+
+.secondary-btn {
+  background: white;
+  color: var(--green-dark);
+  border: 2px solid var(--green);
+  margin-left: 7px;
+}
+
+.lesson-area, .quiz-area {
+  display: none;
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  margin-top: 22px;
+}
+
+.word-card {
+  background: #f1faeb;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+  line-height: 1.7;
+}
+
+.word-card strong { color: #368900; }
+
+.quiz-question {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 12px 0;
+}
+
+.quiz-option {
+  width: 100%;
+  text-align: left;
+  margin: 6px 0;
+  background: white;
+  color: var(--ink);
+  border: 2px solid var(--border);
+}
+
+.quiz-option:hover {
+  background: #f1faeb;
+  border-color: var(--green);
+}
+
+#feedback {
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.detector-section {
+  background: #f1f5ff;
+  border: 2px solid #dce5ff;
+  border-radius: 22px;
+  padding: 25px;
+  scroll-margin-top: 85px;
+}
+
+.detector-section h2 { margin-top: 0; }
+
+textarea {
+  width: 100%;
+  min-height: 125px;
+  padding: 15px;
+  border: 2px solid #d8dfeb;
+  border-radius: 13px;
+  font-family: inherit;
+  font-size: 16px;
+  resize: vertical;
+  margin: 12px 0;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #6487ed;
+}
+
+.detect-button {
+  background: #3157d5;
+}
+
+.detect-button:hover { background: #2443b0; }
+
+.result-box {
+  background: white;
+  border: 1px solid #dce5ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-top: 15px;
+  min-height: 55px;
+  line-height: 1.6;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.category {
+  background: white;
+  border: 1px solid #dce5ff;
+  border-radius: 12px;
+  padding: 15px;
+  line-height: 1.6;
+}
+
+.category strong {
+  display: block;
+  color: #3157d5;
+  font-size: 17px;
+}
+
+.about {
+  background: var(--background);
+  padding: 24px;
+  border-radius: 18px;
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 15px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media(max-width:600px) {
+  header { justify-content: center; }
+  nav { justify-content: center; gap: 13px; }
+  .hero { padding: 22px; }
+  .secondary-btn { margin: 8px 0 0; }
+}
+</style>
 </head>
+
 <body>
-<div style="text-align:center; padding:15px;">
-  <a href="learn.html"
-     style="background:#3157d5;color:white;
-     padding:12px 20px;border-radius:10px;
-     text-decoration:none;font-weight:bold;">
-    📚 Start Learning English
-  </a>
-</div>
-    <header>
-        <h1>CodeSwitch Sentinel</h1>
-        <p>Understanding multilingual communication with AI</p>
-    </header>
 
-    <main>
-        <section class="intro">
-            <h2>Language Classification Research</h2>
-            <p>
-                Can machine learning distinguish English,
-                Bangla, Romanized Bangla, and mixed messages?
-            </p>
-        </section>
+<header>
+  <div class="logo">🌱 LinguaLearn</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#practice">Practice</a>
+    <a href="#detection">AI Detection</a>
+  </nav>
+</header>
 
-        <section class="classifier">
-            <h2>Test a message</h2>
+<main>
 
-            <textarea id="message"
-                placeholder="Write a message here..."></textarea>
+<!-- HOMEPAGE -->
+<section class="hero" id="home">
+  <div class="hero-tag">WELCOME TO LINGUALEARN</div>
+  <h1>Learn English. Understand Languages. 🌍</h1>
+  <p>
+    বাংলা থেকে ইংরেজি শেখা শুরু করুন।
+    Learn English through simple lessons, interactive practice,
+    and multilingual AI language identification.
+  </p>
 
-            <button onclick="analyzeMessage()">
-                Analyze Message
-            </button>
+  <div class="stats">
+    <div class="stat">⭐ <span id="xp">0</span> XP</div>
+    <div class="stat">📚 <span id="completed">0</span>/3 Lessons</div>
+    <div class="stat">🎯 Beginner</div>
+  </div>
+</section>
 
-            <p id="result">Your result will appear here.</p>
-        </section>
+<!-- LEARNING -->
+<section class="section" id="lessons">
+  <h2 class="section-heading">📚 Your Learning Path</h2>
+  <p class="subtitle">
+    Start with the basics and build your English skills step by step.
+  </p>
 
-        <section class="categories">
-            <h2>Our four categories</h2>
-            <ul>
-                <li>EN — English</li>
-                <li>BN — Bangla script</li>
-                <li>BN-ROM — Romanized Bangla</li>
-                <li>MIXED — Bangla and English</li>
-            </ul>
-        </section>
-    </main>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress"></div>
+  </div>
 
-    <footer>
-        <p>CodeSwitch Sentinel | AI + Languages Research</p>
-    </footer>
+  <div class="lesson-grid">
 
-    <script src="dataset.js"></script>
+    <article class="lesson-card">
+      <div class="lesson-icon">📖</div>
+      <h3>Unit 1: Vocabulary</h3>
+      <p>Learn useful English words with Bangla meanings.</p>
+      <button onclick="openLesson(0)">Start lesson</button>
+      <p id="status0">Not completed</p>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-icon">💬</div>
+      <h3>Unit 2: Sentences</h3>
+      <p>Learn to create simple everyday English sentences.</p>
+      <button onclick="openLesson(1)">Start lesson</button>
+      <p id="status1">Not completed</p>
+    </article>
+
+    <article class="lesson-card">
+      <div class="lesson-icon">🧠</div>
+      <h3>Unit 3: Grammar</h3>
+      <p>Understand the basics of am, is and are.</p>
+      <button onclick="openLesson(2)">Start lesson</button>
+      <p id="status2">Not completed</p>
+    </article>
+
+  </div>
+
+  <div class="lesson-area" id="lessonArea">
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonContent"></div>
+    <button onclick="completeLesson()">Complete lesson ✓</button>
+    <button class="secondary-btn" onclick="closeLesson()">Close</button>
+  </div>
+</section>
+
+<!-- PRACTICE -->
+<section class="section" id="practice">
+  <h2 class="section-heading">🎯 Practice Zone</h2>
+  <p class="subtitle">
+    Test your knowledge with a short English quiz.
+  </p>
+
+  <button onclick="startQuiz()">Start practice</button>
+
+  <div class="quiz-area" id="quizArea">
+    <h3 id="questionText"></h3>
+    <div id="options"></div>
+    <p id="feedback"></p>
+    <button id="nextButton" onclick="nextQuestion()" style="display:none">
+      Next question
+    </button>
+    <p id="score"></p>
+  </div>
+</section>
+
+<!-- LANGUAGE DETECTION -->
+<section class="section detector-section" id="detection">
+  <h2>🌐 AI Language Detection</h2>
+  <p>
+    Meet CodeSwitch Sentinel — a lightweight machine-learning
+    prototype that identifies four types of multilingual text.
+  </p>
+
+  <h3>Test a message</h3>
+  <textarea id="message"
+    placeholder="Write English, বাংলা, Romanized Bangla, or mixed text..."></textarea>
+
+  <button class="detect-button" onclick="analyzeMessage()">
+    Analyze Message →
+  </button>
+
+  <div class="result-box" id="result" aria-live="polite">
+    Your result will appear here.
+  </div>
+
+  <h3 style="margin-top:28px;">Our four categories</h3>
+
+  <div class="category-grid">
+    <div class="category">
+      <strong>EN</strong>
+      English text
+    </div>
+    <div class="category">
+      <strong>BN</strong>
+      Bangla in Bengali script
+    </div>
+    <div class="category">
+      <strong>BN-ROM</strong>
+      Romanized Bangla
+    </div>
+    <div class="category">
+      <strong>MIXED</strong>
+      Bangla and English together
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about">
+  <h2>About This Project</h2>
+  <p>
+    LinguaLearn combines beginner-friendly English learning
+    with CodeSwitch Sentinel, a multilingual text classification
+    research prototype.
+  </p>
+  <p>
+    The learning lessons and language classifier are separate
+    features. The classifier is an experimental model and can
+    make incorrect predictions.
+  </p>
+  <p>
+    <strong>Our mission:</strong> Make language learning and
+    multilingual communication more accessible.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <strong>LinguaLearn × CodeSwitch Sentinel</strong><br>
+  AI + Languages Research | Learn without limits 🌱
+</footer>
+
+<!-- YOUR ORIGINAL CLASSIFIER FILES -->
+<script src="dataset.js"></script>
 <script src="script.js"></script>
+
+<!-- LEARNING FEATURES -->
+<script>
+const lessons = [
+  {
+    title: "Unit 1: Vocabulary",
+    content: [
+      ["Apple", "আপেল"],
+      ["Book", "বই"],
+      ["Water", "পানি"],
+      ["Friend", "বন্ধু"],
+      ["School", "বিদ্যালয়"]
+    ]
+  },
+  {
+    title: "Unit 2: Everyday Sentences",
+    content: [
+      ["I am happy.", "আমি খুশি।"],
+      ["How are you?", "তুমি কেমন আছো?"],
+      ["Thank you.", "ধন্যবাদ।"],
+      ["I like reading.", "আমি পড়তে ভালোবাসি।"],
+      ["This is my book.", "এটি আমার বই।"]
+    ]
+  },
+  {
+    title: "Unit 3: Grammar Basics",
+    content: [
+      ["I am a student.", "আমি একজন শিক্ষার্থী।"],
+      ["She is happy.", "সে খুশি।"],
+      ["He is my friend.", "সে আমার বন্ধু।"],
+      ["They are students.", "তারা শিক্ষার্থী।"],
+      ["We are learning.", "আমরা শিখছি।"]
+    ]
+  }
+];
+
+let currentLesson = -1;
+
+let completedLessons = JSON.parse(
+  localStorage.getItem("linguaCompleted") || "[]"
+);
+
+let xp = Number(localStorage.getItem("linguaXP") || 0);
+
+function updateStats() {
+  document.getElementById("xp").textContent = xp;
+
+  document.getElementById("completed").textContent =
+    completedLessons.length;
+
+  document.getElementById("progress").style.width =
+    (completedLessons.length / 3 * 100) + "%";
+
+  lessons.forEach((lesson, index) => {
+    document.getElementById("status" + index).textContent =
+      completedLessons.includes(index)
+        ? "✓ Completed"
+        : "Not completed";
+  });
+}
+
+function openLesson(index) {
+  currentLesson = index;
+
+  const lesson = lessons[index];
+
+  document.getElementById("lessonArea").style.display = "block";
+  document.getElementById("lessonTitle").textContent = lesson.title;
+
+  const content = document.getElementById("lessonContent");
+  content.innerHTML = "";
+
+  lesson.content.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "word-card";
+
+    const english = document.createElement("strong");
+    english.textContent = item[0];
+
+    const bangla = document.createElement("div");
+    bangla.textContent = item[1];
+
+    card.appendChild(english);
+    card.appendChild(bangla);
+    content.appendChild(card);
+  });
+
+  document.getElementById("lessonArea").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function completeLesson() {
+  if (currentLesson < 0) return;
+
+  if (!completedLessons.includes(currentLesson)) {
+    completedLessons.push(currentLesson);
+    xp += 10;
+
+    localStorage.setItem(
+      "linguaCompleted",
+      JSON.stringify(completedLessons)
+    );
+
+    localStorage.setItem("linguaXP", xp);
+  }
+
+  updateStats();
+  alert("Great work! You earned 10 XP.");
+  closeLesson();
+}
+
+function closeLesson() {
+  document.getElementById("lessonArea").style.display = "none";
+  currentLesson = -1;
+}
+
+const questions = [
+  {
+    q: "What does Apple mean in Bangla?",
+    options: ["বই", "আপেল", "পানি"],
+    answer: 1,
+    explanation: "Apple means আপেল."
+  },
+  {
+    q: "Choose the correct sentence.",
+    options: ["I is happy.", "I am happy.", "I are happy."],
+    answer: 1,
+    explanation: "We use am with I."
+  },
+  {
+    q: "What does Thank you mean?",
+    options: ["ধন্যবাদ", "বিদায়", "স্বাগতম"],
+    answer: 0,
+    explanation: "Thank you means ধন্যবাদ."
+  },
+  {
+    q: "Complete: She ___ happy.",
+    options: ["am", "are", "is"],
+    answer: 2,
+    explanation: "We use is with she."
+  },
+  {
+    q: "What does Friend mean?",
+    options: ["শিক্ষক", "বন্ধু", "ছাত্র"],
+    answer: 1,
+    explanation: "Friend means বন্ধু."
+  }
+];
+
+let questionIndex = 0;
+let quizScore = 0;
+let answered = false;
+
+function startQuiz() {
+  questionIndex = 0;
+  quizScore = 0;
+
+  document.getElementById("quizArea").style.display = "block";
+
+  showQuestion();
+
+  document.getElementById("quizArea").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function showQuestion() {
+  answered = false;
+
+  const question = questions[questionIndex];
+
+  document.getElementById("questionText").textContent =
+    "Question " + (questionIndex + 1) + "/5: " + question.q;
+
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("score").textContent = "";
+
+  document.getElementById("nextButton").style.display = "none";
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+
+    button.className = "quiz-option";
+    button.textContent = option;
+
+    button.onclick = () => checkAnswer(index);
+
+    options.appendChild(button);
+  });
+}
+
+function checkAnswer(index) {
+  if (answered) return;
+
+  answered = true;
+
+  const question = questions[questionIndex];
+  const correct = index === question.answer;
+
+  if (correct) quizScore++;
+
+  document.getElementById("feedback").textContent =
+    (correct ? "✓ Correct! " : "Not quite. ") +
+    question.explanation;
+
+  document.getElementById("nextButton").style.display = "inline-block";
+}
+
+function nextQuestion() {
+  questionIndex++;
+
+  if (questionIndex < questions.length) {
+    showQuestion();
+    return;
+  }
+
+  document.getElementById("questionText").textContent =
+    "Practice complete! 🎉";
+
+  document.getElementById("options").innerHTML = "";
+
+  document.getElementById("feedback").textContent =
+    "Your score: " + quizScore + " out of 5.";
+
+  document.getElementById("nextButton").style.display = "none";
+
+  if (quizScore === 5) {
+    xp += 10;
+    localStorage.setItem("linguaXP", xp);
+    updateStats();
+    document.getElementById("score").textContent =
+      "Perfect score! You earned 10 XP.";
+  } else {
+    document.getElementById("score").textContent =
+      "Keep practicing to improve!";
+  }
+}
+
+updateStats();
+</script>
+
 </body>
-</html>
+    </html>
+    
