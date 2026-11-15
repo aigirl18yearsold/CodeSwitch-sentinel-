@@ -31,5 +31,36 @@ const trainingData = [
     { text: "আমি research project তৈরি করছি", label: "MIXED" },
     { text: "আজ weather খুব সুন্দর", label: "MIXED" },
     { text: "আমি machine learning শিখতে চাই", label: "MIXED" }
+    
+    // Additional researcher-written pilot examples
+
+    // EN
+    { text: "Education creates new opportunities", label: "EN" },
+    { text: "My computer is working properly", label: "EN" },
+    { text: "Science helps us understand nature", label: "EN" },
+    { text: "I enjoy solving difficult problems", label: "EN" },
+    { text: "Learning takes patience and practice", label: "EN" },
+
+    // BN
+    { text: "শিক্ষা নতুন সুযোগ তৈরি করে", label: "BN" },
+    { text: "আমার কম্পিউটার ঠিকভাবে কাজ করছে", label: "BN" },
+    { text: "বিজ্ঞান আমাদের প্রকৃতি বুঝতে সাহায্য করে", label: "BN" },
+    { text: "আমি কঠিন সমস্যা সমাধান করতে পছন্দ করি", label: "BN" },
+    { text: "শেখার জন্য ধৈর্য ও অনুশীলন দরকার", label: "BN" },
+
+    // BN-ROM
+    { text: "Shikkha notun sujog toiri kore", label: "BN-ROM" },
+    { text: "Amar computer thikvabe kaj korche", label: "BN-ROM" },
+    { text: "Biggan amader prokriti bujhte shahajjo kore", label: "BN-ROM" },
+    { text: "Ami kothin shomossha shomadhan korte pochondo kori", label: "BN-ROM" },
+    { text: "Shekhar jonno dhoirjo o onushilon dorkar", label: "BN-ROM" },
+
+    // MIXED
+    { text: "শিক্ষা new opportunities তৈরি করে", label: "MIXED" },
+    { text: "আমার computer ঠিকভাবে কাজ করছে", label: "MIXED" },
+    { text: "Science আমাদের প্রকৃতি বুঝতে সাহায্য করে", label: "MIXED" },
+    { text: "আমি difficult problems solve করতে পছন্দ করি", label: "MIXED" },
+    { text: "Learning এর জন্য ধৈর্য দরকার", label: "MIXED" },
+
 ];
   
